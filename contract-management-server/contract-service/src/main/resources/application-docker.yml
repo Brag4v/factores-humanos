@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://contract-db:5432/contract_db
+    username: cms_user
+    password: cms_password
+
+collaborator:
+  service:
+    url: http://collaborator-service:8081
+
+notification:
+  service:
+    url: http://notification-service:8083
+
+logging:
+  level:
+    root: INFO
+    com.cms.contract: INFO
+    org.hibernate.SQL: INFO

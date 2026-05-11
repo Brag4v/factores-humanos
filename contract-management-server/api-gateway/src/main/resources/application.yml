@@ -1,0 +1,66 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      default-filters: []
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: false
+            maxAge: 3600
+
+# Service URLs
+services:
+  collaborator:
+    url: ${COLLABORATOR_SERVICE_URL:http://localhost:8081}
+  contract:
+    url: ${CONTRACT_SERVICE_URL:http://localhost:8082}
+  notification:
+    url: ${NOTIFICATION_SERVICE_URL:http://localhost:8083}
+
+logging:
+  level:
+    root: INFO
+    com.cms.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    urls:
+      - name: Collaborator Service
+        url: /collaborator-service/api-docs
+      - name: Contract Service
+        url: /contract-service/api-docs
+      - name: Notification Service
+        url: /notification-service/api-docs

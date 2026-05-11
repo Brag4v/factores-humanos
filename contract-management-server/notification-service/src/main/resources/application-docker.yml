@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://notification-db:5432/notification_db
+    username: cms_user
+    password: cms_password
+
+  mail:
+    host: mailhog
+    port: 1025
+
+logging:
+  level:
+    root: INFO
+    com.cms.notification: INFO
+    org.hibernate.SQL: INFO

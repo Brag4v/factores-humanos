@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://collaborator-db:5432/collaborator_db
+    username: cms_user
+    password: cms_password
+
+logging:
+  level:
+    root: INFO
+    com.cms.collaborator: INFO
+    org.hibernate.SQL: INFO

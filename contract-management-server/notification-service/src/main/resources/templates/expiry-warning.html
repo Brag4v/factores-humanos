@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contract Expiry Warning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #dc3545;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+        }
+        .details {
+            background-color: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #dc3545;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 0 0 5px 5px;
+        }
+        .warning {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚠️ Contract Expiry Warning</h1>
+    </div>
+    <div class="content">
+        <p>Dear <span th:text="${recipientName}">Employee Name</span>,</p>
+        
+        <p class="warning">Your contract is expiring soon!</p>
+        
+        <p>This is to inform you that your employment contract will expire in 
+           <strong th:text="${daysUntilExpiry}">X</strong> days.</p>
+        
+        <div class="details">
+            <h3>Contract Details</h3>
+            <p><strong>Contract Number:</strong> <span th:text="${contractNumber}">CTR-XXXX</span></p>
+            <p><strong>Contract Type:</strong> <span th:text="${contractType}">Full Time</span></p>
+            <p><strong>Start Date:</strong> <span th:text="${startDate}">YYYY-MM-DD</span></p>
+            <p><strong>End Date:</strong> <span th:text="${endDate}">YYYY-MM-DD</span></p>
+        </div>
+        
+        <p>Please contact the HR department as soon as possible to discuss your contract renewal options.</p>
+        
+        <p>Best regards,<br>
+        Contract Management System</p>
+    </div>
+    <div class="footer">
+        <p>This is an automated message from the Contract Management System.</p>
+        <p>Please do not reply to this email.</p>
+    </div>
+</body>
+</html>

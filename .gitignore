@@ -1,0 +1,32 @@
+# Node
+node_modules/
+package-lock.json
+
+# Next.js
+/.next/
+/out/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

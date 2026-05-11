@@ -1,0 +1,182 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # DATABASES
+  # ============================================
+  collaborator-db:
+    image: postgres:15-alpine
+    container_name: collaborator-db
+    environment:
+      POSTGRES_DB: collaborator_db
+      POSTGRES_USER: cms_user
+      POSTGRES_PASSWORD: cms_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - collaborator-data:/var/lib/postgresql/data
+    networks:
+      - cms-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cms_user -d collaborator_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  contract-db:
+    image: postgres:15-alpine
+    container_name: contract-db
+    environment:
+      POSTGRES_DB: contract_db
+      POSTGRES_USER: cms_user
+      POSTGRES_PASSWORD: cms_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - contract-data:/var/lib/postgresql/data
+    networks:
+      - cms-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cms_user -d contract_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notification-db:
+    image: postgres:15-alpine
+    container_name: notification-db
+    environment:
+      POSTGRES_DB: notification_db
+      POSTGRES_USER: cms_user
+      POSTGRES_PASSWORD: cms_password
+    ports:
+      - "5435:5432"
+    volumes:
+      - notification-data:/var/lib/postgresql/data
+    networks:
+      - cms-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cms_user -d notification_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # SERVICES
+  # ============================================
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - COLLABORATOR_SERVICE_URL=http://collaborator-service:8081
+      - CONTRACT_SERVICE_URL=http://contract-service:8082
+      - NOTIFICATION_SERVICE_URL=http://notification-service:8083
+    depends_on:
+      - collaborator-service
+      - contract-service
+      - notification-service
+    networks:
+      - cms-network
+
+  collaborator-service:
+    build:
+      context: .
+      dockerfile: collaborator-service/Dockerfile
+    container_name: collaborator-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://collaborator-db:5432/collaborator_db
+      - SPRING_DATASOURCE_USERNAME=cms_user
+      - SPRING_DATASOURCE_PASSWORD=cms_password
+    depends_on:
+      collaborator-db:
+        condition: service_healthy
+    networks:
+      - cms-network
+
+  contract-service:
+    build:
+      context: .
+      dockerfile: contract-service/Dockerfile
+    container_name: contract-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://contract-db:5432/contract_db
+      - SPRING_DATASOURCE_USERNAME=cms_user
+      - SPRING_DATASOURCE_PASSWORD=cms_password
+      - COLLABORATOR_SERVICE_URL=http://collaborator-service:8081
+      - NOTIFICATION_SERVICE_URL=http://notification-service:8083
+    depends_on:
+      contract-db:
+        condition: service_healthy
+      collaborator-service:
+        condition: service_started
+    networks:
+      - cms-network
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: notification-service/Dockerfile
+    container_name: notification-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://notification-db:5432/notification_db
+      - SPRING_DATASOURCE_USERNAME=cms_user
+      - SPRING_DATASOURCE_PASSWORD=cms_password
+      - SPRING_MAIL_HOST=mailhog
+      - SPRING_MAIL_PORT=1025
+    depends_on:
+      notification-db:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+    networks:
+      - cms-network
+
+  # ============================================
+  # INFRASTRUCTURE
+  # ============================================
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - cms-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@cms.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - collaborator-db
+      - contract-db
+      - notification-db
+    networks:
+      - cms-network
+
+networks:
+  cms-network:
+    driver: bridge
+
+volumes:
+  collaborator-data:
+  contract-data:
+  notification-data:

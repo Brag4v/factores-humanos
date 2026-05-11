@@ -1,0 +1,13 @@
+services:
+  collaborator:
+    url: http://collaborator-service:8081
+  contract:
+    url: http://contract-service:8082
+  notification:
+    url: http://notification-service:8083
+
+logging:
+  level:
+    root: INFO
+    com.cms.gateway: INFO
+    org.springframework.cloud.gateway: INFO

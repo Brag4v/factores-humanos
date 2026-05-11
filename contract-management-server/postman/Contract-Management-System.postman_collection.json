@@ -1,0 +1,472 @@
+{
+  "info": {
+    "name": "Contract Management System",
+    "description": "API collection for Contract Management System MVP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Collaborators",
+      "item": [
+        {
+          "name": "Create Collaborator",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nationalId\": \"9876543210\",\n  \"employeeCode\": \"EMP006\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\",\n  \"email\": \"test.user@company.com\",\n  \"phone\": \"+1234567899\",\n  \"department\": \"Engineering\",\n  \"position\": \"Software Developer\",\n  \"status\": \"ACTIVE\",\n  \"hireDate\": \"2024-01-15\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators"]
+            }
+          }
+        },
+        {
+          "name": "Get All Collaborators",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators?page=0&size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "20"},
+                {"key": "status", "value": "ACTIVE", "disabled": true},
+                {"key": "department", "value": "Engineering", "disabled": true},
+                {"key": "search", "value": "john", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Collaborator by National ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators/1234567890",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators", "1234567890"]
+            }
+          }
+        },
+        {
+          "name": "Get Collaborator Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators/1234567890/details",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators", "1234567890", "details"]
+            }
+          }
+        },
+        {
+          "name": "Update Collaborator",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nationalId\": \"1234567890\",\n  \"employeeCode\": \"EMP001\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"phone\": \"+1234567890\",\n  \"department\": \"Engineering\",\n  \"position\": \"Tech Lead\",\n  \"status\": \"ACTIVE\",\n  \"hireDate\": \"2022-01-15\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators/1234567890",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators", "1234567890"]
+            }
+          }
+        },
+        {
+          "name": "Delete Collaborator",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators/1234567890",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators", "1234567890"]
+            }
+          }
+        },
+        {
+          "name": "Get Collaborator Performance Reviews",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators/1234567890/performance-reviews",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators", "1234567890", "performance-reviews"]
+            }
+          }
+        },
+        {
+          "name": "Check Collaborator Exists",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/collaborators/1234567890/exists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "collaborators", "1234567890", "exists"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance Reviews",
+      "item": [
+        {
+          "name": "Submit Performance Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collaboratorId\": \"1234567890\",\n  \"reviewerName\": \"Sarah Manager\",\n  \"reviewerEmail\": \"sarah.manager@company.com\",\n  \"reviewPeriodStart\": \"2024-07-01\",\n  \"reviewPeriodEnd\": \"2024-12-31\",\n  \"rating\": 4.25,\n  \"performanceCategory\": \"EXCEEDS_EXPECTATIONS\",\n  \"strengths\": \"Excellent technical skills and leadership\",\n  \"areasForImprovement\": \"Could delegate more tasks\",\n  \"comments\": \"Great performance this quarter\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/performance-reviews",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "performance-reviews"]
+            }
+          }
+        },
+        {
+          "name": "Get Review by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/performance-reviews/11111111-1111-1111-1111-111111111111",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "performance-reviews", "11111111-1111-1111-1111-111111111111"]
+            }
+          }
+        },
+        {
+          "name": "Get Reviews by Collaborator",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/performance-reviews/collaborator/1234567890?page=0&size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "performance-reviews", "collaborator", "1234567890"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "20"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Latest Review",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/performance-reviews/collaborator/1234567890/latest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "performance-reviews", "collaborator", "1234567890", "latest"]
+            }
+          }
+        },
+        {
+          "name": "Get Average Rating",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/performance-reviews/collaborator/1234567890/average-rating",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "performance-reviews", "collaborator", "1234567890", "average-rating"]
+            }
+          }
+        },
+        {
+          "name": "Check Renewal Eligibility",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/performance-reviews/collaborator/1234567890/renewal-eligibility",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "performance-reviews", "collaborator", "1234567890", "renewal-eligibility"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contracts",
+      "item": [
+        {
+          "name": "Create Contract",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collaboratorId\": \"1234567890\",\n  \"contractType\": \"FULL_TIME\",\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2025-01-01\",\n  \"salary\": 85000.00,\n  \"currency\": \"USD\",\n  \"termsAndConditions\": \"Standard employment contract with benefits\",\n  \"autoRenewal\": true,\n  \"noticePeriodDays\": 30\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts"]
+            }
+          }
+        },
+        {
+          "name": "Get All Contracts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts?page=0&size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "20"},
+                {"key": "status", "value": "ACTIVE", "disabled": true},
+                {"key": "contractType", "value": "FULL_TIME", "disabled": true},
+                {"key": "collaboratorId", "value": "1234567890", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Contract by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts/aaaa1111-bbbb-cccc-dddd-eeee11111111",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts", "aaaa1111-bbbb-cccc-dddd-eeee11111111"]
+            }
+          }
+        },
+        {
+          "name": "Get Contract by Collaborator",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts/collaborator/1234567890",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts", "collaborator", "1234567890"]
+            }
+          }
+        },
+        {
+          "name": "Get Expiring Contracts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts/expiring-soon?days=30",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts", "expiring-soon"],
+              "query": [
+                {"key": "days", "value": "30"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Contract",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractType\": \"FULL_TIME\",\n  \"salary\": 90000.00,\n  \"currency\": \"USD\",\n  \"termsAndConditions\": \"Updated terms with salary increase\",\n  \"autoRenewal\": true,\n  \"noticePeriodDays\": 30\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts/aaaa1111-bbbb-cccc-dddd-eeee11111111",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts", "aaaa1111-bbbb-cccc-dddd-eeee11111111"]
+            }
+          }
+        },
+        {
+          "name": "Renew Contract",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newEndDate\": \"2026-01-01\",\n  \"newSalary\": 95000.00,\n  \"newTermsAndConditions\": \"Renewed contract with 10% salary increase\",\n  \"autoRenewal\": true,\n  \"noticePeriodDays\": 30,\n  \"renewalNotes\": \"Excellent performance - approved for renewal\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts/aaaa1111-bbbb-cccc-dddd-eeee11111111/renew",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts", "aaaa1111-bbbb-cccc-dddd-eeee11111111", "renew"]
+            }
+          }
+        },
+        {
+          "name": "Terminate Contract",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Voluntary resignation - employee accepted another position\",\n  \"effectiveDate\": \"2024-03-31\",\n  \"additionalNotes\": \"Employee agreed to 2-week transition period\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contracts/aaaa1111-bbbb-cccc-dddd-eeee11111111/terminate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "contracts", "aaaa1111-bbbb-cccc-dddd-eeee11111111", "terminate"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Create Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractId\": \"aaaa1111-bbbb-cccc-dddd-eeee11111111\",\n  \"collaboratorId\": \"1234567890\",\n  \"notificationType\": \"RENEWAL_REMINDER\",\n  \"recipientEmail\": \"john.doe@company.com\",\n  \"recipientName\": \"John Doe\",\n  \"subject\": \"Contract Renewal Reminder\",\n  \"messageBody\": \"Dear John Doe,\\n\\nYour contract is expiring in 30 days. Please contact HR.\\n\\nBest regards,\\nContract Management System\",\n  \"daysUntilExpiry\": 30,\n  \"scheduledAt\": \"2024-12-01T08:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications"]
+            }
+          }
+        },
+        {
+          "name": "Send Notification Immediately",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractId\": \"aaaa1111-bbbb-cccc-dddd-eeee11111111\",\n  \"collaboratorId\": \"1234567890\",\n  \"notificationType\": \"EXPIRY_WARNING\",\n  \"recipientEmail\": \"john.doe@company.com\",\n  \"recipientName\": \"John Doe\",\n  \"subject\": \"URGENT: Contract Expiring Soon\",\n  \"messageBody\": \"Dear John Doe,\\n\\nURGENT: Your contract expires in 7 days!\\n\\nPlease contact HR immediately.\\n\\nBest regards,\\nContract Management System\",\n  \"daysUntilExpiry\": 7\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/send",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications", "send"]
+            }
+          }
+        },
+        {
+          "name": "Get All Notifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications?page=0&size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "20"},
+                {"key": "status", "value": "PENDING", "disabled": true},
+                {"key": "notificationType", "value": "RENEWAL_REMINDER", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Notification by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/11110000-2222-3333-4444-555566667777",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications", "11110000-2222-3333-4444-555566667777"]
+            }
+          }
+        },
+        {
+          "name": "Get Notifications by Contract",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/contract/aaaa1111-bbbb-cccc-dddd-eeee11111111",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications", "contract", "aaaa1111-bbbb-cccc-dddd-eeee11111111"]
+            }
+          }
+        },
+        {
+          "name": "Get Pending Notifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/pending",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications", "pending"]
+            }
+          }
+        },
+        {
+          "name": "Cancel Notification",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/22220000-3333-4444-5555-666677778888/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "notifications", "22220000-3333-4444-5555-666677778888", "cancel"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
