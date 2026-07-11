@@ -1,0 +1,82 @@
+databases:
+  - name: cms-db
+    plan: free
+    databaseName: contract_db
+    user: cms_user
+
+services:
+  - type: web
+    name: cms-collaborator-service
+    runtime: docker
+    plan: free
+    dockerfilePath: ./contract-management-server/collaborator-service/Dockerfile
+    dockerContext: ./contract-management-server
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: DB_HOST
+        fromDatabase: { name: cms-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: cms-db, property: port }
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: { name: cms-db, property: user }
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: { name: cms-db, property: password }
+
+  - type: web
+    name: cms-contract-service
+    runtime: docker
+    plan: free
+    dockerfilePath: ./contract-management-server/contract-service/Dockerfile
+    dockerContext: ./contract-management-server
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: DB_HOST
+        fromDatabase: { name: cms-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: cms-db, property: port }
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: { name: cms-db, property: user }
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: { name: cms-db, property: password }
+      - key: COLLABORATOR_SERVICE_URL
+        value: https://cms-collaborator-service.onrender.com
+      - key: NOTIFICATION_SERVICE_URL
+        value: https://cms-notification-service.onrender.com
+
+  - type: web
+    name: cms-notification-service
+    runtime: docker
+    plan: free
+    dockerfilePath: ./contract-management-server/notification-service/Dockerfile
+    dockerContext: ./contract-management-server
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: DB_HOST
+        fromDatabase: { name: cms-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: cms-db, property: port }
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: { name: cms-db, property: user }
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: { name: cms-db, property: password }
+
+  - type: web
+    name: cms-api-gateway
+    runtime: docker
+    plan: free
+    dockerfilePath: ./contract-management-server/api-gateway/Dockerfile
+    dockerContext: ./contract-management-server
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: COLLABORATOR_SERVICE_URL
+        value: https://cms-collaborator-service.onrender.com
+      - key: CONTRACT_SERVICE_URL
+        value: https://cms-contract-service.onrender.com
+      - key: NOTIFICATION_SERVICE_URL
+        value: https://cms-notification-service.onrender.com
+      - key: ALLOWED_ORIGIN
+        value: https://TU-FRONTEND.vercel.app

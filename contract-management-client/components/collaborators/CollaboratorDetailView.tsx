@@ -19,7 +19,7 @@ function InfoItem({ icon: Icon, label, value }: { icon: React.ElementType; label
   if (!value) return null
   return (
     <div className="flex items-center gap-2 text-sm">
-      <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />
+      <Icon className="h-4 w-4 shrink-0 text-blue-600" />
       <span className="text-muted-foreground">{label}:</span>
       <span className="font-medium">{value}</span>
     </div>
@@ -88,17 +88,18 @@ export function CollaboratorDetailView({ nationalId }: CollaboratorDetailViewPro
       </div>
 
       {/* Profile card */}
-      <Card>
-        <CardContent className="pt-5 pb-5">
+      <Card className="overflow-hidden border-2 border-blue-300 shadow-md">
+<div className="h-3 bg-gradient-to-r from-blue-700 via-blue-500 to-blue-300" />
+  <CardContent className="pt-5 pb-5 bg-blue-50/70">
           <div className="grid gap-6 sm:grid-cols-2">
             {/* Left column: identity + contact */}
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 font-bold text-lg select-none">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg shadow-md shadow-blue-200 select-none">
                   {data.firstName[0]}{data.lastName[0]}
                 </div>
                 <div>
-                  <p className="font-semibold">{data.fullName}</p>
+                  <p className="font-semibold text-blue-900 text-base">{data.fullName}</p>
                   <p className="text-xs text-muted-foreground font-mono">{data.nationalId} · {data.employeeCode}</p>
                 </div>
               </div>
@@ -115,9 +116,9 @@ export function CollaboratorDetailView({ nationalId }: CollaboratorDetailViewPro
             </div>
 
             {/* Right column: performance summary */}
-            <div className="space-y-4 sm:border-l sm:pl-6">
+            <div className="space-y-4 sm:border-l-2 sm:border-blue-400 sm:pl-6">
               <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
                   Renewal Eligibility
                 </p>
                 <TooltipProvider>
@@ -136,7 +137,7 @@ export function CollaboratorDetailView({ nationalId }: CollaboratorDetailViewPro
 
               {avgRating !== null ? (
                 <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
                     Average Rating
                   </p>
                   <div className="flex items-center gap-2">
@@ -152,7 +153,7 @@ export function CollaboratorDetailView({ nationalId }: CollaboratorDetailViewPro
                 </div>
               ) : (
                 <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
                     Average Rating
                   </p>
                   <p className="text-sm text-muted-foreground italic">No reviews yet</p>
@@ -161,7 +162,7 @@ export function CollaboratorDetailView({ nationalId }: CollaboratorDetailViewPro
 
               {data.latestReview && (
                 <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
                     Latest Review
                   </p>
                   <div className="rounded-md border bg-muted/30 p-3 text-sm space-y-1">
