@@ -79,4 +79,4 @@ services:
       - key: NOTIFICATION_SERVICE_URL
         value: https://cms-notification-service.onrender.com
       - key: ALLOWED_ORIGIN
-        value: https://TU-FRONTEND.vercel.app
+        value: https://factores-humanos-seven.vercel.app
