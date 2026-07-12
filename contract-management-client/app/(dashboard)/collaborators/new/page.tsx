@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
 import { NewCollaboratorFlow } from '@/components/collaborators/NewCollaboratorFlow'
+
+export const metadata: Metadata = {
+  title: 'Add Collaborator',
+  description: 'Register a new collaborator.',
+}
 
 export default function NewCollaboratorPage() {
   return (

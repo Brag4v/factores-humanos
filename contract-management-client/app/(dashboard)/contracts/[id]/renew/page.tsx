@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import { RenewContractForm } from '@/components/contracts/RenewContractForm'
 
 interface RenewContractPageProps {
   params: { id: string }
+}
+
+export const metadata: Metadata = {
+  title: 'Renew Contract',
+  description: 'Renew an existing contract.',
 }
 
 export default function RenewContractPage({ params }: RenewContractPageProps) {

@@ -56,7 +56,7 @@ export function ContractFilters() {
       <div className="flex flex-wrap gap-3">
         {/* Status */}
         <Select value={status} onValueChange={(v) => updateParam('status', v === '__clear__' ? '' : v)}>
-          <SelectTrigger className="w-40">
+          <SelectTrigger className="w-40" aria-label="Filter by status">
             <SelectValue placeholder="All Statuses" />
           </SelectTrigger>
           <SelectContent>
@@ -71,7 +71,7 @@ export function ContractFilters() {
 
         {/* Contract Type */}
         <Select value={contractType} onValueChange={(v) => updateParam('contractType', v === '__clear__' ? '' : v)}>
-          <SelectTrigger className="w-44">
+          <SelectTrigger className="w-44" aria-label="Filter by contract type">
             <SelectValue placeholder="All Types" />
           </SelectTrigger>
           <SelectContent>
@@ -85,7 +85,11 @@ export function ContractFilters() {
         </Select>
 
         {/* Collaborator search */}
+        <label htmlFor="contract-collaborator-search" className="sr-only">
+          Search by collaborator ID
+        </label>
         <Input
+          id="contract-collaborator-search"
           placeholder="Search by collaborator ID…"
           defaultValue={collaboratorId}
           onChange={(e) => handleCollaboratorSearch(e.target.value)}

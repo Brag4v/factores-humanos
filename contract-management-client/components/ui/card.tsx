@@ -15,9 +15,16 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 )
 CardHeader.displayName = 'CardHeader'
 
-const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('font-semibold leading-none tracking-tight', className)} {...props} />
+interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  /** Heading level to render. Defaults to 'h2' since a Card is normally the first
+   *  sub-section under a page's <h1>. Pass e.g. as="h3" when nesting a Card inside
+   *  another already-headed section, to keep the heading order logical. */
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+}
+
+const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
+  ({ className, as: Comp = 'h2', ...props }, ref) => (
+    <Comp ref={ref} className={cn('font-semibold leading-none tracking-tight', className)} {...props} />
   )
 )
 CardTitle.displayName = 'CardTitle'
