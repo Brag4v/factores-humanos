@@ -1,13 +1,7 @@
-import type { Metadata } from 'next'
 import { TerminateContractForm } from '@/components/contracts/TerminateContractForm'
 
 interface TerminateContractPageProps {
   params: { id: string }
-}
-
-export const metadata: Metadata = {
-  title: 'Terminate Contract',
-  description: 'Terminate an existing contract.',
 }
 
 export default function TerminateContractPage({ params }: TerminateContractPageProps) {

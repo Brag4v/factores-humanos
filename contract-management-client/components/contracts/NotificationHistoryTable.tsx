@@ -37,7 +37,6 @@ export function NotificationHistoryTable({ contractId }: NotificationHistoryTabl
         icon={Bell}
         title="No notifications"
         description="No notifications have been sent for this contract."
-        headingLevel="h3"
       />
     )
   }

@@ -7,10 +7,7 @@ import { Toaster } from 'sonner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'CMS Contract Manager',
-    template: '%s | CMS Contract Manager',
-  },
+  title: 'Contract Management System',
   description: 'Manage employee contracts, collaborators, and performance reviews',
 }
 

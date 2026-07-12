@@ -1,13 +1,7 @@
-import type { Metadata } from 'next'
 import { EditCollaboratorForm } from '@/components/collaborators/EditCollaboratorForm'
 
 interface EditCollaboratorPageProps {
   params: { nationalId: string }
-}
-
-export const metadata: Metadata = {
-  title: 'Edit Collaborator',
-  description: "Update a collaborator's details.",
 }
 
 export default function EditCollaboratorPage({ params }: EditCollaboratorPageProps) {

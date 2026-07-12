@@ -47,26 +47,19 @@ export function CollaboratorFilters() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       {/* Search */}
-      <div className="grid min-w-[220px] flex-1 items-center">
-        <label htmlFor="collaborator-search" className="sr-only">
-          Search collaborators by name, ID, or email
-        </label>
+      <div className="relative min-w-[220px] flex-1">
+        <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
-          id="collaborator-search"
           placeholder="Search by name, ID, email…"
           defaultValue={search}
           onChange={(e) => debouncedSearch(e.target.value)}
-          className="col-start-1 row-start-1 pl-8"
-        />
-        <Search
-          aria-hidden="true"
-          className="col-start-1 row-start-1 ml-2.5 h-4 w-4 justify-self-start text-muted-foreground"
+          className="pl-8"
         />
       </div>
 
       {/* Status filter */}
       <Select value={status} onValueChange={(v) => updateParam('status', v === 'ALL' ? '' : v)}>
-        <SelectTrigger className="w-[150px]" aria-label="Filter by status">
+        <SelectTrigger className="w-[150px]">
           <SelectValue placeholder="All statuses" />
         </SelectTrigger>
         <SelectContent>
@@ -81,11 +74,7 @@ export function CollaboratorFilters() {
 
       {/* Department filter */}
       <div className="min-w-[160px]">
-        <label htmlFor="collaborator-department" className="sr-only">
-          Filter by department
-        </label>
         <Input
-          id="collaborator-department"
           placeholder="Department…"
           defaultValue={department}
           onChange={(e) => debouncedDepartment(e.target.value)}

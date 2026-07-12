@@ -1,11 +1,5 @@
 import { Suspense } from 'react'
-import type { Metadata } from 'next'
 import { CreateContractForm } from '@/components/contracts/CreateContractForm'
-
-export const metadata: Metadata = {
-  title: 'New Contract',
-  description: 'Create a new contract.',
-}
 
 export default function NewContractPage() {
   return (
