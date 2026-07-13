@@ -57,6 +57,7 @@ export function FileDropzone({ file, onFileChange, error }: FileDropzoneProps) {
           size="icon"
           className="h-8 w-8 text-muted-foreground hover:text-destructive"
           onClick={() => onFileChange(null)}
+          aria-label="Remove file"
         >
           <X className="h-4 w-4" />
         </Button>

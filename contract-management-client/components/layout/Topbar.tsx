@@ -9,7 +9,7 @@ export function Topbar() {
       </div>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="text-slate-500 hover:text-slate-900">
+        <Button variant="ghost" size="icon" className="text-slate-500 hover:text-slate-900" aria-label="Notifications">
           <Bell className="h-4 w-4" />
         </Button>
 
